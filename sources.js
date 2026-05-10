@@ -233,6 +233,17 @@ export const zai = [
   ['zai/glm-4.5-flash',                                   'GLM-4.5-Flash',       'S',  '59.2%', '128k'],
 ]
 
+// 📖 DeepSeek source - https://api.deepseek.com
+// 📖 OpenAI-compatible endpoint: https://api.deepseek.com/v1/chat/completions
+// 📖 Free tier: 60 RPM, 60k TPM; pay-as-you-go: 200 RPM, 1M TPM (rolling window)
+// 📖 Get API key: https://platform.deepseek.com
+// 📖 Env var: DEEPSEEK_API_KEY
+export const deepseek = [
+  // ── S+ tier — SWE-bench Verified ≥70% ──
+  ['deepseek-v4-flash',               'DeepSeek V4 Flash',   'S+', '72.0%', '1M'],
+  ['deepseek-v4-pro',                 'DeepSeek V4 Pro',     'S+', '73.1%', '1M'],
+]
+
 // 📖 Alibaba Cloud (DashScope) source - https://dashscope-intl.aliyuncs.com
 // 📖 OpenAI-compatible endpoint: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
 // 📖 Free tier: 1M tokens per model (Singapore region only), valid for 90 days
@@ -437,6 +448,11 @@ export const sources = {
     name: 'OpenRouter',
     url: 'https://openrouter.ai/api/v1/chat/completions',
     models: openrouter,
+  },
+  deepseek: {
+    name: 'DeepSeek',
+    url: 'https://api.deepseek.com/v1/chat/completions',
+    models: deepseek,
   },
   sambanova: {
     name: 'SambaNova',

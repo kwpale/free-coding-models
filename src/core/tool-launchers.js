@@ -908,17 +908,26 @@ export function prepareExternalToolLaunch(mode, model, config, options = {}) {
   if (mode === 'copilot') {
     // 📖 copilot: set BYOK env vars so copilot uses the selected provider/model
     const copilotModelId = resolveLauncherModelId(model)
-    env.COPILOT_PROVIDER_BASE_URL = baseUrl
-    env.COPILOT_MODEL = copilotModelId
-    if (apiKey) env.COPILOT_PROVIDER_API_KEY = apiKey
-
-    // 📖 Set context window limits from model data
-    const promptTokens = parseCtxToTokens(model.ctx)
-    if (promptTokens) env.COPILOT_PROVIDER_MAX_PROMPT_TOKENS = String(promptTokens)
-    // 📖 16k max output as a safety cap — most S+/S tier coding models
-    // 📖 support 16-32k output. copilot falls back to built-in model
-    // 📖 catalog defaults when a model ID is recognized.
-    env.COPILOT_PROVIDER_MAX_OUTPUT_TOKENS = '16384'
+      if (model.providerKey === 'deepseek') {
+        env.COPILOT_PROVIDER_TYPE = 'anthropic'
+        env.COPILOT_PROVIDER_BASE_URL = 'https://api.deepseek.com/anthropic'
+        env.COPILOT_MODEL = copilotModelId
+        if (apiKey) env.COPILOT_PROVIDER_API_KEY = apiKey
+        const promptTokens = parseCtxToTokens(model.ctx)
+        if (promptTokens) env.COPILOT_PROVIDER_MAX_PROMPT_TOKENS = String(promptTokens)
+        // DeepSeek supports up to 384k output; use 128k as recommended
+        env.COPILOT_PROVIDER_MAX_OUTPUT_TOKENS = '128000'
+      } else {
+        env.COPILOT_PROVIDER_BASE_URL = baseUrl
+        env.COPILOT_MODEL = copilotModelId
+        if (apiKey) env.COPILOT_PROVIDER_API_KEY = apiKey
+        const promptTokens = parseCtxToTokens(model.ctx)
+        if (promptTokens) env.COPILOT_PROVIDER_MAX_PROMPT_TOKENS = String(promptTokens)
+        // 📖 16k max output as a safety cap — most S+/S tier coding models
+        // 📖 support 16-32k output. copilot falls back to built-in model
+        // 📖 catalog defaults when a model ID is recognized.
+        env.COPILOT_PROVIDER_MAX_OUTPUT_TOKENS = '16384'
+      }
 
     return {
       command: 'copilot',
@@ -1020,3 +1029,4 @@ export async function startExternalTool(mode, model, config) {
   const command = (mode === 'xcode' || mode === 'zcode') ? launchPlan.command : resolveLaunchCommand(mode, launchPlan.command)
   return spawnCommand(command, launchPlan.args, launchPlan.env)
 }
+

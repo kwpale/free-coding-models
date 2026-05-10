@@ -46,6 +46,7 @@ export const PROVIDER_CAPABILITIES = {
   codestral: { telemetryType: 'header', supportsEndpoint: false, usageDisplay: 'percent', resetCadence: 'daily' },
   qwen: { telemetryType: 'header', supportsEndpoint: false, usageDisplay: 'percent', resetCadence: 'unknown' },
   ovhcloud: { telemetryType: 'header', supportsEndpoint: false, usageDisplay: 'percent', resetCadence: 'unknown' },
+  deepseek: { telemetryType: 'header', supportsEndpoint: false, usageDisplay: 'percent', resetCadence: 'rolling' },
 
   // Providers that have a dedicated usage/credits endpoint
   openrouter: { telemetryType: 'endpoint', supportsEndpoint: true, usageDisplay: 'percent', resetCadence: 'unknown' },

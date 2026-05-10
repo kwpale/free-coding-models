@@ -131,6 +131,7 @@ const ENV_VARS = {
   googleai:   'GOOGLE_API_KEY',
   cloudflare: ['CLOUDFLARE_API_TOKEN', 'CLOUDFLARE_API_KEY'],
   qwen:       'DASHSCOPE_API_KEY',
+  deepseek:   'DEEPSEEK_API_KEY',
   zai:        'ZAI_API_KEY',
   ovhcloud:   'OVH_AI_ENDPOINTS_ACCESS_TOKEN',
   'opencode-zen': 'OPENCODE_ZEN_API_KEY',

@@ -77,6 +77,7 @@ Create a free account on one provider below to get started. A few providers (`Ki
 
 | # | Provider | Models | Tier range | Free tier | Env var |
 |---|----------|--------|-----------|-----------|--------|
+| 0 | [DeepSeek](https://platform.deepseek.com) | 2 | S+ | 60 RPM, 60k TPM | `DEEPSEEK_API_KEY` |
 | 1 | [NVIDIA NIM](https://build.nvidia.com) | 27 | S+ → C | ~40 RPM (no credit card) | `NVIDIA_API_KEY` |
 | 2 | [Groq](https://console.groq.com/keys) | 8 | S → B | 30 RPM, 1K‑14.4K req/day (no credit card) | `GROQ_API_KEY` |
 | 3 | [Cerebras](https://cloud.cerebras.ai) | 2 | S+ → S | 30 RPM, 1M tokens/day (no credit card) | `CEREBRAS_API_KEY` |

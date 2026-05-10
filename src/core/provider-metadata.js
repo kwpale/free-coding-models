@@ -56,6 +56,7 @@ export const ENV_VAR_NAMES = {
   zai:        'ZAI_API_KEY',
   ovhcloud:   'OVH_AI_ENDPOINTS_ACCESS_TOKEN',
   qwen:       'DASHSCOPE_API_KEY',
+  deepseek:   'DEEPSEEK_API_KEY',
   'opencode-zen': 'OPENCODE_ZEN_API_KEY',
   kilo:       'KILO_API_KEY',
   llm7:       'LLM7_API_KEY',
@@ -210,6 +211,13 @@ export const PROVIDER_METADATA = {
     signupUrl: 'https://dash.cloudflare.com',
     signupHint: 'Create AI API token + set CLOUDFLARE_ACCOUNT_ID',
     rateLimits: 'Free: 10k neurons/day, text-gen 300 RPM',
+  },
+  deepseek: {
+    label: 'DeepSeek',
+    color: chalk.rgb(0, 191, 255), // deep sky blue
+    signupUrl: 'https://platform.deepseek.com',
+    signupHint: 'Platform → API Keys → Create Key',
+    rateLimits: 'Free tier: 60 RPM, 60k TPM; pay-as-you-go: 200 RPM, 1M TPM (rolling window)',
   },
   perplexity: {
     label: 'Perplexity API',

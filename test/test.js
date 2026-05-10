@@ -6620,3 +6620,48 @@ describe('M2: React hook modules import cleanly', () => {
     assert.equal(typeof mod.buildUrlParams, 'function')
   })
 })
+
+// DeepSeek provider integration tests
+describe('DeepSeek provider integration', () => {
+  it('sources.deepseek exists with correct name and url', () => {
+    assert.ok(sources.deepseek, 'sources.deepseek should exist')
+    assert.equal(sources.deepseek.name, 'DeepSeek')
+    assert.equal(sources.deepseek.url, 'https://api.deepseek.com/v1/chat/completions')
+  })
+
+  it('deepseek model array has correct structure', () => {
+    const models = sources.deepseek.models
+    assert.ok(Array.isArray(models))
+    assert.equal(models.length, 2)
+    const expected = [
+      ['deepseek-v4-flash', 'DeepSeek V4 Flash', 'S+', '72.0%', '1M'],
+      ['deepseek-v4-pro', 'DeepSeek V4 Pro', 'S+', '73.1%', '1M']
+    ]
+    assert.deepEqual(models, expected)
+  })
+
+  it('MODELS includes deepseek entries with correct providerKey', () => {
+    const deepseekEntries = MODELS.filter(m => m[5] === 'deepseek')
+    assert.equal(deepseekEntries.length, 2)
+    const ids = deepseekEntries.map(e => e[0]).sort()
+    assert.deepEqual(ids, ['deepseek-v4-flash', 'deepseek-v4-pro'])
+  })
+
+  it('deepseek is present in PROVIDER_METADATA', () => {
+    assert.ok(PROVIDER_METADATA.deepseek, 'PROVIDER_METADATA should have deepseek entry')
+    const meta = PROVIDER_METADATA.deepseek
+    assert.equal(meta.label, 'DeepSeek')
+    assert.ok(meta.color)
+    assert.equal(meta.signupUrl, 'https://platform.deepseek.com')
+    assert.ok(meta.signupHint.includes('API Key'))
+    assert.ok(meta.rateLimits.includes('60 RPM'))
+  })
+
+  it('deepseek is present in PROVIDER_CAPABILITIES', () => {
+    assert.ok(PROVIDER_CAPABILITIES.deepseek, 'PROVIDER_CAPABILITIES should have deepseek')
+    const cap = PROVIDER_CAPABILITIES.deepseek
+    assert.equal(cap.telemetryType, 'header')
+    assert.equal(cap.usageDisplay, 'percent')
+    assert.equal(cap.resetCadence, 'rolling')
+  })
+})
