@@ -1668,7 +1668,8 @@ describe('renderTable outdated footer banner', () => {
 
 describe('renderTable responsive column visibility', () => {
   // 📖 Helper: render with a specific terminalCols value (all other params at sensible defaults)
-  const renderAtWidth = (cols) => renderTable({ results: [mockResult({ providerKey: 'nvidia', totalTokens: 0, pings: [{ ms: 200, code: '200' }] })], sortColumn: 'avg', sortDirection: 'asc', pingInterval: 10_000, lastPingTime: Date.now(), mode: 'opencode', terminalRows: 30, terminalCols: cols, pingMode: 'normal', pingModeSource: 'auto', settingsUpdateState: 'idle', versionAlertsEnabled: false })
+  // 📖 Strip ANSI codes so assertions work regardless of chalk's TTY detection.
+  const renderAtWidth = (cols) => stripAnsi(renderTable({ results: [mockResult({ providerKey: 'nvidia', totalTokens: 0, pings: [{ ms: 200, code: '200' }] })], sortColumn: 'avg', sortDirection: 'asc', pingInterval: 10_000, lastPingTime: Date.now(), mode: 'opencode', terminalRows: 30, terminalCols: cols, pingMode: 'normal', pingModeSource: 'auto', settingsUpdateState: 'idle', versionAlertsEnabled: false }))
 
   // 📖 Full row width is computed dynamically from active columns.
   // 📖 Ping columns are permanently compact: Last Ping and Avg Ping both use 9 chars.
